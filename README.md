@@ -12,6 +12,14 @@ Download the latest pre-release from [the releases page](https://github.com/Keth
 
 Alternatively, if you have Go properly installed and set up, run `go install github.com/Kethsar/ytarchive@dev`
 
+se usar windows:
+- baixa o arquivo ytarchive_windows_amd64.zip e descompacta numa pasta
+- abre um terminal nessa pasta
+- entra com o comando de terminal:
+ytarchive --threads 8 cole_a_url_do_video_aqui 
+
+enjoy
+
 ## Usage
 
 ```
@@ -374,4 +382,367 @@ FORMAT TEMPLATE OPTIONS
 	Note on upload_date: rather than the actual upload date, stream start date is used to
 	provide a better default date for youtube-dl output templates that use upload_date.
 	To get the actual upload date, publish date seems to be the same as upload date for streams.
+```
+##TRADUÇÃO PARA PORTUGUES: 
+```
+uso: ytarchive [OPÇÕES] [url] [qualidade]
+
+[url] é uma URL de transmissão ao vivo do YouTube. Se não for fornecida, você será
+solicitado a inserir uma.
+
+[qualidade] é uma lista delimitada por barras de qualidades de vídeo que você deseja
+que sejam selecionadas para download, da mais para a menos desejada. Se não
+fornecida, você será solicitado a inserir uma, com uma lista de qualidades
+disponíveis para escolher. Os seguintes valores são válidos:
+audio_only, 144p, 240p, 360p, 480p, 720p, 720p60, 1080p, 1080p60, 1440p, 1440p60, 2160p, 2160p60, melhor
+Opções:
+	-h
+	--ajuda
+		Mostrar esta mensagem de ajuda.
+
+	-4
+	--ipv4
+		Faça todas as conexões usando IPv4.
+
+	-6
+	--ipv6
+		Faça todas as conexões usando IPv6.
+
+	--somente informação
+		Imprimir informações de fluxo, como título do vídeo, qualidade selecionada
+		Horário de início e duração da transmissão e depois saída.
+
+	--adicionar-metadados
+		Escreva algumas informações básicas de metadados no arquivo final.
+
+	--url de áudio GOOGLEVIDEO_URL
+		Passe a url fornecida como a url do fragmento de áudio. Deve ser um
+		URL do Google Video com parâmetro itag de 140.
+
+	--capture-duration DURAÇÃO ou TIMESTRING
+		Captura uma transmissão ao vivo pelo período de tempo especificado
+		e então sai e finaliza o vídeo.
+		Suporta durações de tempo (por exemplo, 1d8h10m) ou sequências de tempo (por exemplo, 12:30:05).
+
+	-c
+	--cookies ARQUIVO_DE_COOKIES
+		Dê um arquivo cookies.txt que tenha seus cookies do YouTube. Permite
+		o script para acessar conteúdo exclusivo para membros se você for um membro
+		para o usuário do fluxo fornecido. Deve ser o formato de cookie do netscape.
+
+	--depurar
+		Imprima muitas informações extras.
+
+	--desabilitar-estado-de-salvamento
+		Desabilite o salvamento de estado para downloads retomáveis. Útil se você estiver
+		arquivando o mesmo fluxo várias vezes no mesmo diretório
+		por algum motivo.
+
+	-dp
+	--directory-permissions PERMISSÕES
+		Defina as permissões do sistema de arquivos para diretórios criados. Usa unix
+		notação numérica. Esteja ciente das configurações umask para seu diretório.
+		O padrão é 0755.
+
+	--erro
+		Imprima somente erros e informações gerais.
+
+	--ffmpeg-caminho FFMPEG_PATH
+		Defina um local específico do ffmpeg, incluindo o nome do programa.
+		por exemplo "C:\ffmpeg\ffmpeg.exe" ou "/opt/ffmpeg/ffmpeg"
+
+	-fp
+	--file-permissions PERMISSÕES
+		Defina as permissões do sistema de arquivos para os arquivos criados. Usa unix
+		notação numérica. Esteja ciente das configurações umask para seu diretório.
+		O padrão é 0644.
+
+	--h264
+		Baixe somente vídeos h264, ignorando o VP9 caso ele tenha sido usado.
+
+	-k
+	--manter-arquivos-ts
+		Mantenha os arquivos de áudio e vídeo do fluxo final após a mixagem
+		em vez de excluí-los.
+
+	-eu
+	--caracteres semelhantes
+		Use sósias para caracteres proibidos no formato de saída do nome do arquivo.
+		Emula caracteres proibidos usando os mesmos caracteres de substituição do yt-dlp.
+		Isso fará com que os nomes dos arquivos pareçam mais próximos dos títulos originais.
+
+	--somente para membros
+		Baixe apenas streams exclusivos para membros. Só pode ser usado com URLs de canais
+		como /live, /streams, etc, e requer cookies.
+		Útil ao monitorar canais e você deseja apenas fluxos de membros.
+
+	--mesclar
+		Executar automaticamente o comando ffmpeg para os fluxos baixados
+		ao cancelar manualmente o download. Você será avisado do contrário.
+
+	--metadados CHAVE=VALOR
+		Ao gravar metadados, substitua/adicione a entrada de chave-valor dos metadados.
+		KEY é uma chave de metadados que o ffmpeg reconhece. Se for inválido, o ffmpeg pode ignorá-lo ou dar erro.
+		VALUE é um modelo de formato. Se string vazia (''), omita metadados de escrita para a chave.
+		Veja OPÇÕES DE MODELO DE FORMATO abaixo para obter uma lista de chaves de formato disponíveis.
+		Pode ser usado várias vezes.
+
+	--mkv
+		Multiplique o arquivo final em um contêiner mkv em vez de um contêiner mp4.
+		Ignorado ao baixar somente áudio.
+
+	--canal-monitor
+		Monitore continuamente um canal para streams. Requer usar uma URL /live.
+		Isso retornará para verificar se há um fluxo após o término do download
+		o atual. Implica '-r 60 --merge' a menos que definido separadamente. Mínimo
+		Tempo de espera de 30 segundos, 60 ou mais recomendado. Usar "melhor" para qualidade ou
+		estabelecendo uma lista decentemente exaustiva recomendada para evitar a espera por
+		entrada se a qualidade selecionada não estiver disponível para determinados fluxos.
+		Tenha cuidado ao monitorar o uso do disco ao usar isso para evitar encher
+		sua viagem enquanto estiver fora.
+
+	--nova linha
+		Imprima cada mensagem em uma nova linha, em vez de algumas mensagens reutilizarem uma
+		linha.
+
+	--sem-áudio
+		Não baixe o fluxo de áudio
+
+	--no-frag-files
+		Mantenha os dados do fragmento na memória em vez de gravá-los em um arquivo intermediário.
+		Isso tem a possibilidade de aumentar drasticamente o uso de RAM se um fragmento
+		downloads particularmente lentos, pois mais fragmentos depois que ele termina primeiro.
+		Isso só é um problema quando --threads >1
+		Altamente recomendado se você não tem limitações estritas de RAM. Especialmente
+		no Wangblows, o que causou problemas com bloqueio de arquivo ao tentar
+		excluir arquivos de fragmentos.
+
+	--não mesclar
+		Não execute o comando ffmpeg para os fluxos baixados
+		ao cancelar manualmente o download. Você será avisado do contrário.
+
+	--não-salvar
+		Não salve nenhum dado ou arquivo baixado se não tiver o ffmpeg
+		executar ao cancelar manualmente o download. Você será avisado do contrário.
+		Não faz nada se --merge estiver definido.
+
+	--sem-estado-de-salvamento
+		Não deixe arquivos necessários para retomar os downloads quando manualmente
+		cancelando o download. Você será avisado do contrário.
+		Não faz nada se --merge ou --save estiverem definidos.
+
+	--sem-vídeo
+		Se uma URL do Google Video for fornecida ou passada com --audio-url, não
+		prompt para uma url de vídeo. Se uma url de vídeo for fornecida com --video-url
+		então isso é efetivamente ignorado.
+
+	-n
+	--não espere
+		Não espere por uma transmissão ao vivo se ela for uma transmissão futura agendada.
+
+	-o
+	--output FORMATO_DO_NOME_DO_ARQUIVO
+		Defina o nome do arquivo de saída EXCLUINDO A EXTENSÃO. Pode incluir
+		formatação semelhante ao youtube-dl, embora muito mais limitada.
+		Veja OPÇÕES DE FORMATO abaixo para obter uma lista de chaves de formato disponíveis.
+		O padrão é '%(title)s-%(id)s'
+
+	--potoken <TOKEN PO>
+		Token PO do seu navegador, basicamente necessário junto com os cookies atualmente.
+		Consulte https://github.com/yt-dlp/yt-dlp/wiki/Extractors#po-token-guide
+
+	--proxy <ESQUEMA>://[<USUÁRIO>:<SENHA>@]<HOST>:<PORTA>
+		Especifique um proxy a ser usado para download. por exemplo
+			- meias5://127.0.0.1:1080
+			- http://192.168.1.1:8080
+			- http://usuário:senha@proxy.exemplo.com:8080
+
+		Servidores proxy HTTP, HTTPS e SOCKS5 são suportados.
+
+	-q
+	--quieto
+		Não imprima nada no console, exceto informações relevantes para a entrada do usuário.
+
+	--retry-frags TENTATIVAS
+		Defina o número de tentativas a serem feitas ao baixar um fragmento de fluxo.
+		Defina como 0 para tentar novamente indefinidamente ou até que não consigamos mais.
+		O padrão é 10.
+
+	-r
+	--retry-stream SEGUNDOS
+		Se estiver esperando por uma transmissão ao vivo agendada, verifique novamente se a transmissão está
+		a cada SEGUNDOS em vez de esperar pelo horário inicial agendado.
+		Se SECONDS for menor que o atraso da pesquisa fornecido pelo YouTube (normalmente
+		15 segundos), então este será definido como o valor fornecido pelo YouTube.
+
+	--salvar
+		Salvar automaticamente todos os dados e arquivos baixados se não tiver
+		ffmpeg executado ao cancelar manualmente o download. Você será solicitado
+		caso contrário. Não faz nada se --merge estiver definido.
+
+	--salvar-estado
+		Deixe os arquivos sozinhos automaticamente e não exclua nada quando manualmente
+		cancelando o download, permitindo retomar o download mais tarde quando
+		possível. Você será avisado de outra forma.
+		Para retomar, é necessário que o stream esteja disponível para download normalmente.
+		Não faz nada se --merge ou --save estiverem definidos.
+
+	--áudio separado
+		Salve o áudio em um arquivo separado, semelhante ao download
+		audio_only, junto com o arquivo final multiplexado. Isso inclui a incorporação
+		metadados e a miniatura, se definida.
+
+	--start-delay DURAÇÃO ou TIMESTRING
+		Aguarda um período de tempo especificado antes de começar a capturar um fluxo daquele momento.
+		Suporta durações de tempo (por exemplo, 1d8h10m) ou sequências de tempo (por exemplo, 12:30:05).
+		
+		Nota: * NÃO suportado ao usar também '--live-from'.
+		* Se a transmissão estiver agendada e ainda não tiver começado, então
+		o atraso não começa a ser contado até que a transmissão tenha começado.
+		* Ignorado ao retomar um download.
+
+	-td
+	--temporary-dir DIRETÓRIO
+		Defina o diretório de trabalho para o download. É aqui que o
+		arquivos temporários serão armazenados. Se não for definido, o diretório de saída
+		será usado.
+
+	--threads CONTAGEM_DE_FIOS
+		Defina o número de threads a serem usados para baixar áudio e vídeo
+		fragmentos. O número total de threads em execução será
+		THREAD_COUNT * 2 + 3. Tópico principal, um tópico para cada áudio e
+		download de vídeo e THREAD_COUNT número de baixadores de fragmentos
+		tanto para áudio quanto para vídeo.
+		
+		Definir isso como um número grande pode causar o download
+		para começar a falhar com HTTP 401. Reiniciando o download com um menor
+		contagem de threads até que você não tenha mais 401s deve funcionar. O padrão é 1.
+
+	-t
+	--miniatura
+		Baixe e incorpore a miniatura do fluxo no arquivo finalizado.
+		Se a miniatura será exibida corretamente depende do seu navegador de arquivos.
+		O Windows parece funcionar. O Nemo no Linux aparentemente não.
+
+	--traço
+		Imprima praticamente qualquer informação que possa ter motivo para ser impressa.
+		Muito spam, não use isso a menos que tenha um bom motivo.
+
+	-v
+	--detalhado
+		Imprima informações extras.
+
+	-V
+	--versão
+		Imprima o número da versão e saia.
+
+	--vídeo-url GOOGLEVIDEO_URL
+		Passe a url fornecida como a url do fragmento de vídeo. Deve ser um
+		URL do Google Video com um parâmetro itag diferente de 140.
+
+	--vp9
+		Se houver uma versão VP9 da qualidade de vídeo selecionada,
+		baixe isso em vez do h264 usual.
+
+	-c
+	--espere
+		Aguarde uma transmissão ao vivo se ela for uma transmissão futura agendada.
+		Se esta opção não for usada quando um fluxo agendado for fornecido,
+		você será perguntado se deseja esperar ou não.
+
+	--avisar
+		Imprimir aviso, erros e informações gerais. Este é o log padrão
+		nível.
+
+	--escrever-descrição
+		Escreva a descrição do vídeo em um arquivo .description separado.
+	
+	--escrever-arquivo-mux
+		Escreva o comando ffmpeg que irá mixar áudio e vídeo ou colocar áudio
+		em um contêiner mp4 em vez de executar o comando automaticamente.
+		Útil se você quiser ajustar o comando, quiser um nível de log mais alto, etc.
+
+	--escrever-miniatura
+		Grave a miniatura em um arquivo separado.
+
+	--ao vivo-de DURAÇÃO, CADEIA DE TEMPO ou AGORA
+		Inicia o download a partir do momento especificado no futuro, no passado ou 'agora'.
+		Use um valor de tempo negativo para voltar no tempo a partir de agora.
+		Use um valor de tempo positivo para especificar o registro de data e hora no fluxo para iniciar
+		capturando de (desde o início do fluxo).
+
+		Suporta durações de tempo (por exemplo, 1d8h30m5s) ou sequências de tempo (por exemplo, 32:30:05).
+		Exemplos: * '--live-from -01:10:00' buscará para trás 1 hora e 10 minutos a partir de agora
+					e então começar a baixar a partir desse momento.
+		* '--live-from 1h10mm00s' começará a baixar a partir de 1 hora e 10 minutos
+				depois que a transmissão começou.
+		* '--live-from now' iniciará a gravação a partir do horário atual da transmissão.
+
+Exemplos:
+	ytarquivo -w
+		Aguarda um fluxo. Solicitará uma URL e qualidade.
+
+	ytarchive -w https://www.youtube.com/watch?v=CnWDmKx9cQQ 1080p60/melhor
+		Aguarda a URL de transmissão fornecida. Priorizará o download em 1080p60.
+		Se 1080p60 não for uma qualidade disponível, ele escolherá a melhor das opções
+		está disponível.
+
+	ytarchive --threads 3 https://www.youtube.com/watch?v=ZK1GXnz-1Lw melhor
+		Baixa o fluxo fornecido com 3 threads na melhor qualidade disponível.
+		Perguntará se você deseja esperar caso a transmissão esteja agendada, mas não tenha iniciado.
+
+	ytarchive -r 30 https://www.youtube.com/channel/UCZlDXzGoo7d44bwdNObFacg/live melhor
+		Aguardará uma transmissão ao vivo no URL fornecido, verificando a cada 30 segundos.
+
+	ytarchive -c cookies-youtube-com.txt https://www.youtube.com/watch?v=_touw1GND-M melhor
+		Carrega o arquivo de cookies fornecido e tenta baixar o fluxo fornecido.
+		Perguntarei se você quer esperar.
+
+	ytarchive --no-wait --add-metadata https://www.youtube.com/channel/UCvaTdHTWBGv3MKj3KVqJVCw/live melhor
+		Tenta baixar o fluxo fornecido e adicionará metadados ao
+		arquivo final multiplexado. Não esperará se não houver fluxo ou se não tiver
+		iniciado.
+
+	ytarchive -o '%(channel)s/%(upload_date)s_%(title)s' https://www.youtube.com/watch?v=HxV9UAMN12o melhor
+		Baixe o fluxo fornecido para um diretório com o nome do canal e um
+		arquivo que terá a data de upload e o título do fluxo. Solicitará
+		espere.
+
+	ytarchive -w -k -t --vp9 --merge --no-frag-files https://www.youtube.com/watch?v=LE8V5iNemBA melhor
+		Espera, mantém os arquivos .ts finais, incorpora a miniatura do fluxo, mescla
+		os arquivos baixados se o download for interrompido manualmente e mantido
+		fragmentos na memória em vez de gravar em arquivos intermediários.
+		Baixa o vídeo do stream em VP9 se disponível. Este conjunto de sinalizadores irá
+		não requer nenhuma entrada extra do usuário caso algo dê errado.
+
+	ytarchive -k -t --vp9 --monitor-channel --no-frag-files https://www.youtube.com/channel/UCvaTdHTWBGv3MKj3KVqJVCw/live melhor
+		O mesmo que acima, mas espera por um fluxo no canal fornecido e irá
+		repita o ciclo após baixar cada fluxo.
+
+	ytarchive --proxy http://127.0.0.1:9050 https://www.youtube.com/watch?v=2aIdHTuyYMA melhor
+		Baixa o fluxo fornecido com um proxy HTTP local.
+
+OPÇÕES DE MODELO DE FORMATO
+	As chaves de modelo de formato fornecidas são feitas para serem as mesmas que seriam para
+	youtube-dl. Veja https://github.com/ytdl-org/youtube-dl#output-template
+
+	Para nomes de arquivo, cada substituição de modelo é higienizada pela substituição de nome de arquivo inválido
+	caracteres com um sublinhado (_). Se '--lookalike-chars' for usado, nome de arquivo inválido
+	os caracteres são substituídos pelos mesmos caracteres semelhantes que o yt-dlp usa.
+
+	id (string): Identificador de vídeo
+	url (string): URL do vídeo
+	título (string): Título do vídeo
+	channel_id (string): ID do canal
+	canal (string): Nome completo do canal onde a transmissão ao vivo está
+	upload_date (string: AAAAMMDD): Tecnicamente, data de início do fluxo, fuso horário UTC - veja a nota abaixo
+	start_date (string: AAAAMMDD): Data de início do fluxo, fuso horário UTC
+	publish_date (string: AAAAMMDD): Data de publicação do fluxo, fuso horário UTC
+	descrição (string): Descrição do vídeo [não permitido para modelo de formato de nome de arquivo]
+
+	Nota sobre upload_date: em vez da data de upload real, a data de início do fluxo é usada para
+	forneça uma data padrão melhor para modelos de saída do youtube-dl que usam upload_date.
+	Para obter a data de upload real, a data de publicação parece ser a mesma que a data de upload dos streams.
+```
+
 ```
